@@ -100,6 +100,22 @@
     box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
   }
 
+  .tarjeta-notificacion {
+
+    background-color: var(--primary-light);
+    width: 100%;
+    max-width: 600px;
+    position: fixed;
+    z-index: 1000;
+    height: auto;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    color: white;
+    display: none;
+
+  }
+
   @media (min-width: 768px) {
     .login-left {
       display: block;

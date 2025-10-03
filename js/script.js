@@ -42,11 +42,15 @@ $("#loginForm").on("submit", function (e) {
       $("#loginError")
         .text("Error de conexión con el servidor")
         .removeClass("d-none");
-    });
+    }); var usuario = document.getElementById("username").value;
+    
 });*/
 
+
 function ValidarCampoUsuario() {
-  var usuario = document.getElementById("username").value;
+
+
+
 
   let btnPrimary = document.querySelector(".btn-primary");
 
@@ -54,9 +58,11 @@ function ValidarCampoUsuario() {
     return;
   }
 
-  btnPrimary.addEventListener("click", () => {
-    if (usuario == null || usuario.length == 0 || /^\s+$/.test(usuario)) {
-      alert("El correo de usuario no puede estar vacio, le inivitamos a rellenar la credencial."
+  btnPrimary.addEventListener("click", (e) => {
+    e.preventDefault();
+    var usuario = document.getElementById("username").value;
+    if (usuario === "") {
+      mostrarNotificacion("El correo de usuario no puede estar vacio, le inivitamos a rellenar la credencial."
         + "Por ejemplo: Usuario: yepesluis006@gmail.com");
       return false;
     }
@@ -65,4 +71,22 @@ function ValidarCampoUsuario() {
 
 }
 
+
 addEventListener("DOMContentLoaded", ValidarCampoUsuario())
+
+function mostrarNotificacion(mensaje) {
+
+  let tarjeta = document.querySelector(".tarjeta-notificacion ");
+
+  if (tarjeta == null) {
+    return;
+  }
+
+  tarjeta.innerHTML = mensaje;
+  tarjeta.style.display = "block";
+
+  setTimeout(() => {
+    tarjeta.style.display = "none";
+  }, 5000);
+
+}
