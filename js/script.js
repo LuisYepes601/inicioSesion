@@ -47,32 +47,12 @@ $("#loginForm").on("submit", function (e) {
 });*/
 
 
-function ValidarCampoUsuario() {
 
 
 
 
-  let btnPrimary = document.querySelector(".btn-primary");
-
-  if (btnPrimary == null) {
-    return;
-  }
-
-  btnPrimary.addEventListener("click", (e) => {
-    e.preventDefault();
-    var usuario = document.getElementById("username").value;
-    if (usuario === "") {
-      mostrarNotificacion("El correo de usuario no puede estar vacio, le inivitamos a rellenar la credencial."
-        + "Por ejemplo: Usuario: yepesluis006@gmail.com");
-      return false;
-    }
-  })
 
 
-}
-
-
-addEventListener("DOMContentLoaded", ValidarCampoUsuario())
 
 function mostrarNotificacion(mensaje) {
 
@@ -90,3 +70,35 @@ function mostrarNotificacion(mensaje) {
   }, 5000);
 
 }
+
+function validarCamposLogin() {
+
+  let btnPrimary = document.querySelector(".btn-primary");
+
+  if (btnPrimary == null) {
+    return;
+  }
+
+  btnPrimary.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    var usuario = document.getElementById("username").value;
+
+    if (usuario === "") {
+      mostrarNotificacion("El campo usuario no puede estar vacio, le inivitamos a rellenar la credencial."
+        + "Por ejemplo: Usuario: yepesluis006@gmail.com");
+      return;
+    }
+
+
+    var password = document.getElementById("password").value;
+
+    if (password === "") {
+      mostrarNotificacion("El campo contraseña no puede estar vacio. Le invitamso a rellenarlo, "
+        + "Por ejemplo: Contraseña: Luis4578#");
+      return;
+    }
+  })
+}
+
+addEventListener("DOMContentLoaded", validarCamposLogin())
