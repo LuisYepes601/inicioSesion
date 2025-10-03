@@ -100,6 +100,20 @@
     box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
   }
 
+  .card-opciones-transversales {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .6rem;
+  }
+
+  .contraseña-card a {
+    color:var(--primary-dark);
+    font-weight: 600;
+  }
+
   .tarjeta-notificacion {
 
     background-color: var(--primary-light);
@@ -114,6 +128,22 @@
     color: white;
     display: none;
 
+  }
+
+  .resgistro-url a {
+    color: black;
+  }
+
+
+  .resgistro-url a i {
+
+    color: var(--primary-dark);
+    margin-right: .5rem;
+  }
+
+  .here {
+    color: var(--primary-dark);
+    font-weight: 800;
   }
 
   @media (min-width: 768px) {

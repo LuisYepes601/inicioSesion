@@ -48,12 +48,6 @@ $("#loginForm").on("submit", function (e) {
 
 
 
-
-
-
-
-
-
 function mostrarNotificacion(mensaje) {
 
   let tarjeta = document.querySelector(".tarjeta-notificacion ");
