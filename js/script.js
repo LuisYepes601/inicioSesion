@@ -13,7 +13,7 @@ async function validarCredenciales() {
     return;
   }
 
-  const response = await fetch("http://192.168.101.80:8080/login/iniciarSesion", {
+  const response = await fetch("http://localhost:8080/login/iniciarSesion", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
