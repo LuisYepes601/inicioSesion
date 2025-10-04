@@ -1,54 +1,52 @@
-// Manejar login con Flask/*
-/*
-$("#loginForm").on("submit", function (e) {
-  e.preventDefault();
+async function validarCredenciales() {
 
-  const username = $("#username").val();
-  const password = $("#password").val();
+  var usuario = document.getElementById("username").value;
 
-  fetch("/login", {
+  if (usuario == null) {
+    return;
+  }
+
+  var password = document.getElementById("password").value;
+
+  if (password == null) {
+
+    return;
+  }
+
+  const response = await fetch("http://localhost:8080/login/iniciarSesion", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.success) {
-        // Redirigir según el rol
-        switch (data.rol) {
-          case "cliente":
-            window.location.href = "/tienda.html";
-            break;
-          case "mesero":
-            window.location.href = "/mesero.html";
-            break;
-          case "cocinero":
-            window.location.href = "/cocinero.html";
-            break;
-          case "admin":
-            window.location.href = "/admin.html";
-            break;
-          default:
-            $("#loginError")
-              .text("Rol desconocido")
-              .removeClass("d-none");
-        }
-      } else {
-        $("#loginError").text(data.message).removeClass("d-none");
-      }
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      correo: usuario,
+      contrasenia: password
     })
-    .catch((err) => {
-      console.error("Error en login:", err);
-      $("#loginError")
-        .text("Error de conexión con el servidor")
-        .removeClass("d-none");
-    }); var usuario = document.getElementById("username").value;
-    
-});*/
+
+  })
+
+  const data = await response.json();
+
+
+  if (response.status !== 200) {
+
+    mostrarNotificacion(JSON.stringify(data.Error),"#f55a5aff")
+  }
+
+}
+
+
+let btnPrimary = document.querySelector(".btn-primary");
+btnPrimary.addEventListener("click", () => {
+
+  validarCredenciales()
+})
 
 
 
-function mostrarNotificacion(mensaje) {
+
+
+function mostrarNotificacion(mensaje, color) {
 
   let tarjeta = document.querySelector(".tarjeta-notificacion ");
 
@@ -58,6 +56,7 @@ function mostrarNotificacion(mensaje) {
 
   tarjeta.innerHTML = mensaje;
   tarjeta.style.display = "block";
+  tarjeta.style.backgroundColor=color;
 
   setTimeout(() => {
     tarjeta.style.display = "none";
@@ -80,7 +79,7 @@ function validarCamposLogin() {
 
     if (usuario === "") {
       mostrarNotificacion("El campo usuario no puede estar vacio, le inivitamos a rellenar la credencial."
-        + "Por ejemplo: Usuario: yepesluis006@gmail.com");
+        + "Por ejemplo: Usuario: yepesluis006@gmail.com","#4caf50");
       return;
     }
 
@@ -89,7 +88,7 @@ function validarCamposLogin() {
 
     if (password === "") {
       mostrarNotificacion("El campo contraseña no puede estar vacio. Le invitamso a rellenarlo, "
-        + "Por ejemplo: Contraseña: Luis4578#");
+        + "Por ejemplo: Contraseña: Luis4578#,#4caf50");
       return;
     }
   })

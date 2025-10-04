@@ -110,7 +110,7 @@
   }
 
   .contraseña-card a {
-    color:var(--primary-dark);
+    color: var(--primary-dark);
     font-weight: 600;
   }
 
