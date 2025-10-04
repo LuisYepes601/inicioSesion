@@ -30,7 +30,16 @@ async function validarCredenciales() {
 
   if (response.status !== 200) {
 
-    mostrarNotificacion(JSON.stringify(data.Error),"#f55a5aff")
+    let tarjeta = document.querySelector(".tarjeta-notificacion ");
+
+    if (tarjeta == null) {
+      return;
+    }
+    tarjeta.style.backgroundColor = "#f66666";
+    mostrarNotificacion(JSON.stringify(data.Error))
+  } else {
+    mostrarNotificacion(JSON.stringify(data.Mensaje))
+    tarjeta.style.backgroundColor = "#4caf50";
   }
 
 }
@@ -46,7 +55,7 @@ btnPrimary.addEventListener("click", () => {
 
 
 
-function mostrarNotificacion(mensaje, color) {
+function mostrarNotificacion(mensaje) {
 
   let tarjeta = document.querySelector(".tarjeta-notificacion ");
 
@@ -56,7 +65,6 @@ function mostrarNotificacion(mensaje, color) {
 
   tarjeta.innerHTML = mensaje;
   tarjeta.style.display = "block";
-  tarjeta.style.backgroundColor=color;
 
   setTimeout(() => {
     tarjeta.style.display = "none";
@@ -79,7 +87,7 @@ function validarCamposLogin() {
 
     if (usuario === "") {
       mostrarNotificacion("El campo usuario no puede estar vacio, le inivitamos a rellenar la credencial."
-        + "Por ejemplo: Usuario: yepesluis006@gmail.com","#4caf50");
+        + "Por ejemplo: Usuario: yepesluis006@gmail.com");
       return;
     }
 
@@ -88,7 +96,7 @@ function validarCamposLogin() {
 
     if (password === "") {
       mostrarNotificacion("El campo contraseña no puede estar vacio. Le invitamso a rellenarlo, "
-        + "Por ejemplo: Contraseña: Luis4578#,#4caf50");
+        + "Por ejemplo: Contraseña: Luis4578#");
       return;
     }
   })
