@@ -11,22 +11,6 @@
     min-height: 100vh;
   }
 
-
-  .btn-primary {
-    background: var(--primary);
-    border: none;
-    transition: all .5s ease !important;
-    background-color: #1b5e20 !important;
-    border: 1px solid #1b5e20 !important;
-  }
-
-  .btn-primary:hover {
-    background: var(--primary) !important;
-    transform: scale(.95) !important;
-  }
-
-
-
   /* LOGIN */
   .login-container {
     display: flex;
@@ -60,16 +44,18 @@
 
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
 
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .btn-primary {
+    background: var(--primary);
+    border: none;
+    transition: all .5s ease !important;
+    background-color: #1b5e20 !important;
+    border: 1px solid #1b5e20 !important;
+  }
+
+  .btn-primary:hover {
+    background: var(--primary) !important;
+    transform: scale(.95) !important;
   }
 
   .logo {
@@ -100,6 +86,7 @@
     box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
   }
 
+
   .card-opciones-transversales {
 
     display: flex;
@@ -107,27 +94,6 @@
     justify-content: center;
     align-items: center;
     gap: .6rem;
-  }
-
-  .contraseña-card a {
-    color: var(--primary-dark);
-    font-weight: 600;
-  }
-
-  .tarjeta-notificacion {
-
-    background-color: var(--primary-light);
-    width: 100%;
-    max-width: 600px;
-    position: fixed;
-    z-index: 1000;
-    height: auto;
-    top: 0;
-    right: 0;
-    padding: 1rem;
-    color: white;
-    display: none;
-
   }
 
   .resgistro-url a {
@@ -146,8 +112,66 @@
     font-weight: 800;
   }
 
+  .contraseña-card a {
+    color: var(--primary-dark);
+    font-weight: 600;
+  }
+
+
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @media (min-width: 768px) {
     .login-left {
+      display: block;
+    }
+  }
+
+
+
+
+  .tarjeta-notificacion {
+
+    background-color: var(--primary-light);
+    width: 100%;
+    max-width: 600px;
+    position: fixed;
+    z-index: 1000;
+    height: auto;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    color: white;
+    display: none;
+
+  }
+
+
+
+
+  /******* RECUPERAR CONTRASEÑA */
+
+  .login-left-recuperar {
+
+    flex: 1;
+    background: url("https://images.unsplash.com/photo-1686543971025-15aa01b5f7c7?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") center/cover no-repeat;
+    display: none;
+
+  }
+
+  @media (min-width: 768px) {
+
+    .login-left-recuperar {
       display: block;
     }
   }

@@ -42,7 +42,15 @@ async function validarCredenciales() {
   if (response.status === 200) {
 
     mostrarNotificacion(JSON.stringify(data.Mensaje));
+
+    const credenciales = JSON.stringify(data.credenciales);
+    console.log(credenciales);
+
+
+
     tarjeta.style.backgroundColor = "#4caf50";
+
+
   }
 
 }
