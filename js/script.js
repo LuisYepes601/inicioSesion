@@ -13,7 +13,7 @@ async function validarCredenciales() {
     return;
   }
 
-  const response = await fetch("http://localhost:8080/login/iniciarSesion", {
+  const response = await fetch("http://192.168.101.80:8080/login/iniciarSesion", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -37,8 +37,11 @@ async function validarCredenciales() {
     }
     tarjeta.style.backgroundColor = "#f66666";
     mostrarNotificacion(JSON.stringify(data.Error))
-  } else {
-    mostrarNotificacion(JSON.stringify(data.Mensaje))
+  }
+
+  if (response.status === 200) {
+
+    mostrarNotificacion(JSON.stringify(data.Mensaje));
     tarjeta.style.backgroundColor = "#4caf50";
   }
 
@@ -102,4 +105,4 @@ function validarCamposLogin() {
   })
 }
 
-addEventListener("DOMContentLoaded", validarCamposLogin())
+addEventListener("DOMContentLoaded", validarCamposLogin)
