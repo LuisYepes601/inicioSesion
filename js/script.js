@@ -1,4 +1,6 @@
-async function validarCredenciales() {
+
+
+async function iniciarSesion() {
 
   var usuario = document.getElementById("username").value;
 
@@ -13,7 +15,7 @@ async function validarCredenciales() {
     return;
   }
 
-  const response = await fetch("http://localhost:8080/login/iniciarSesion", {
+  const response = await fetch('https://restaurantegratitudeapi.onrender.com/login/iniciarSesion', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -59,7 +61,7 @@ async function validarCredenciales() {
 let btnPrimary = document.querySelector(".btn-primary");
 btnPrimary.addEventListener("click", () => {
 
-  validarCredenciales()
+  iniciarSesion()
 })
 
 
