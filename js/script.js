@@ -46,17 +46,18 @@ async function inciarSesion() {
   const datos = await response.json();
 
   if (response.status == 200) {
-    Swal.fire({
-      title: 'Error en el servidor',
-      text: 'Por favor espera un momento o intentalo nuevamente',
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading(); // 
-      }
-    });
+
   }
 
   if (response.status == 400) {
+    Swal.fire({
+      icon: 'error',
+      title: "Datos invalidos.",
+      text: datos.Error,
+      confirmButtonText: 'Aceptar', // 
+      confirmButtonColor: '#2e7d32',
+      allowOutsideClick: false
+    });
 
   }
 
@@ -66,7 +67,7 @@ async function inciarSesion() {
       title: datos.mensaje,
       text: datos.Error,
       confirmButtonText: 'Aceptar', // 
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#2e7d32',
       allowOutsideClick: false
     });
 
