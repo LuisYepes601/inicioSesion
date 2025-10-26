@@ -46,7 +46,7 @@ async function inciarSesion() {
   const datos = await response.json();
 
   if (response.status == 200) {
-
+    localStorage.setItem("usuario", JSON.stringify(datos));
   }
 
   if (response.status == 400) {
