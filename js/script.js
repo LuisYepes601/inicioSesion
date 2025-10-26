@@ -1,73 +1,4 @@
 
-
-async function iniciarSesion() {
-
-  var usuario = document.getElementById("username").value;
-
-  if (usuario == null) {
-    return;
-  }
-
-  var password = document.getElementById("password").value;
-
-  if (password == null) {
-
-    return;
-  }
-
-  const response = await fetch('https://restaurantegratitudeapi.onrender.com/login/iniciarSesion', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      correo: usuario,
-      contrasenia: password
-    })
-
-  })
-
-  const data = await response.json();
-
-
-  if (response.status !== 200) {
-
-    let tarjeta = document.querySelector(".tarjeta-notificacion ");
-
-    if (tarjeta == null) {
-      return;
-    }
-    tarjeta.style.backgroundColor = "#f66666";
-    mostrarNotificacion(JSON.stringify(data.Error))
-  }
-
-  if (response.status === 200) {
-
-    mostrarNotificacion(JSON.stringify(data.Mensaje));
-
-    const credenciales = JSON.stringify(data.credenciales);
-    console.log(credenciales);
-
-
-
-    tarjeta.style.backgroundColor = "#4caf50";
-
-
-  }
-
-}
-
-
-let btnPrimary = document.querySelector(".btn-primary");
-btnPrimary.addEventListener("click", () => {
-
-  iniciarSesion()
-})
-
-
-
-
-
 function mostrarNotificacion(mensaje) {
 
   let tarjeta = document.querySelector(".tarjeta-notificacion ");
@@ -85,34 +16,91 @@ function mostrarNotificacion(mensaje) {
 
 }
 
-function validarCamposLogin() {
 
-  let btnPrimary = document.querySelector(".btn-primary");
+async function inciarSesion() {
 
-  if (btnPrimary == null) {
-    return;
+  const usuario = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  Swal.fire({
+    title: 'Iniciando sesión',
+    text: 'Por favor espera un momento',
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading(); //
+    }
+  });
+
+  const response = await fetch('http://localhost:8080/login/iniciarSesion', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      correo: usuario,
+      contrasenia: password
+    })
+
+  })
+
+  const datos = await response.json();
+
+  if (response.status == 200) {
+    Swal.fire({
+      title: 'Error en el servidor',
+      text: 'Por favor espera un momento o intentalo nuevamente',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading(); // 
+      }
+    });
   }
 
-  btnPrimary.addEventListener("click", (e) => {
-    e.preventDefault();
+  if (response.status == 400) {
 
-    var usuario = document.getElementById("username").value;
+  }
 
-    if (usuario === "") {
-      mostrarNotificacion("El campo usuario no puede estar vacio, le inivitamos a rellenar la credencial."
-        + "Por ejemplo: Usuario: yepesluis006@gmail.com");
-      return;
-    }
+  if (response.status == 404) {
+    Swal.fire({
+      icon: 'error',
+      title: datos.mensaje,
+      text: datos.Error,
+      confirmButtonText: 'Aceptar', // 
+      confirmButtonColor: '#3085d6',
+      allowOutsideClick: false
+    });
+
+  }
+
+  if (response.status >= 500) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error en el servidor',
+      text: 'Por favor espera un momento o inténtalo nuevamente',
+      confirmButtonText: 'Aceptar', // 
+      confirmButtonColor: '#3085d6',
+      allowOutsideClick: false
+    });
+
+  }
+
+  console.log(datos);
 
 
-    var password = document.getElementById("password").value;
 
-    if (password === "") {
-      mostrarNotificacion("El campo contraseña no puede estar vacio. Le invitamso a rellenarlo, "
-        + "Por ejemplo: Contraseña: Luis4578#");
-      return;
-    }
-  })
+
 }
 
-addEventListener("DOMContentLoaded", validarCamposLogin)
+const btn_enviar = document.querySelector(".btn-primary");
+
+
+btn_enviar.addEventListener("click", (e) => {
+
+  e.preventDefault();
+
+  inciarSesion();
+
+})
+
+
+
