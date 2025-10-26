@@ -22,15 +22,15 @@ async function inciarSesion() {
   const usuario = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-   if (!usuario && !password) {
-            Swal.fire({
-                icon: "warning",
-                title: "Campos requeridos",
-                text: "Debes ingresar tu correo y tu contraseña.",
-                confirmButtonColor: "#0d6efd"
-            });
-            return;
-        }
+  if (!usuario && !password) {
+    Swal.fire({
+      icon: "warning",
+      title: "Campos requeridos",
+      text: "Debes ingresar tu correo y tu contraseña.",
+      confirmButtonColor: "#0d6efd"
+    });
+    return;
+  }
 
   Swal.fire({
     title: 'Iniciando sesión',
@@ -56,7 +56,16 @@ async function inciarSesion() {
   const datos = await response.json();
 
   if (response.status == 200) {
+
     localStorage.setItem("usuario", JSON.stringify(datos));
+    
+    const redirectUrl = localStorage.getItem("redirectAfterLogin");
+
+    // Si no hay, lo mandamos al home por defecto
+    const destino = redirectUrl ? redirectUrl : "https://home-qqgw.vercel.app/";
+
+    // Limpiar la variable (para que no se repita)
+    localStorage.removeItem("redirectAfterLogin");
   }
 
   if (response.status == 400) {
