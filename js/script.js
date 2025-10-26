@@ -22,6 +22,16 @@ async function inciarSesion() {
   const usuario = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
+   if (!usuario && !password) {
+            Swal.fire({
+                icon: "warning",
+                title: "Campos requeridos",
+                text: "Debes ingresar tu correo y tu contraseña.",
+                confirmButtonColor: "#0d6efd"
+            });
+            return;
+        }
+
   Swal.fire({
     title: 'Iniciando sesión',
     text: 'Por favor espera un momento',
